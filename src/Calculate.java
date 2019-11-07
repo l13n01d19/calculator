@@ -36,80 +36,59 @@ public class Calculate {
                     System.out.println("Ошибка №2: Невозможно взаимодействие с дробными числами");
                     System.exit(0);
                 case 73:
-                    if (sign < 0) {
-                        if (aR == 0) {
-                            aR = aR + 1;
-                        }
-                    } else {
-                        if (aR == 0) {
-                            bR = bR + 1;
-                        }
-                    }
-                    break;
                 case 105:
-                    if (sign < 0) {
-                        if (aR == 0) {
-                            aR = aR + 1;
+                    if (line.charAt(i + 1) == 'V' || line.charAt(i + 1) == 'v') {
+                        if (sign < 0) {
+                            aR = 4;
+                        } else {
+                            bR = 4;
                         }
+                    } else if (line.charAt(i + 1) == 'X' || line.charAt(i + 1) == 'x') {
+                        if (sign < 0) {
+                            aR = 9;
+                        } else {
+                            bR = 9;
+                        }
+                    } else if (sign < 0) {
+                        aR = aR + 1;
                     } else {
-                        if (aR == 0) {
-                            bR = bR + 1;
-                        }
+                        bR = bR + 1;
                     }
                     break;
                 case 86:
-                    if (line.charAt(i + 1) == 'I' || line.charAt(i + 1) == 'i') {
-                        if (sign < 0) {
-                            aR = 4;
-                        } else {
-                            bR = 4;
-                        }
-                    } else if (sign < 0) {
+                case 118:
+                    if (sign < 0) {
+                        if (aR == 0) {
                             aR = aR + 5;
-                        } else {
+                        }
+                    } else {
+                        if (bR == 0) {
                             bR = bR + 5;
                         }
-                    break;
-                case 118:
-                    if (line.charAt(i + 1) == 'I' || line.charAt(i + 1) == 'i') {
-                        if (sign < 0) {
-                            aR = 4;
-                        } else {
-                            bR = 4;
-                        }
-                    } else if (sign < 0) {
-                        aR = aR + 5;
-                    } else {
-                        bR = bR + 5;
                     }
                     break;
                 case 88:
-                    if (line.charAt(i + 1) == 'I' || line.charAt(i + 1) == 'i') {
-                        if (sign < 0) {
-                            aR = 9;
-                        } else {
-                            bR = 9;
-                        }
-                    } else if (sign < 0) {
-                        aR = aR + 10;
-                    } else {
-                        bR = bR + 10;
-                    }
-                    break;
                 case 120:
-                    if (line.charAt(i + 1) == 'I' || line.charAt(i + 1) == 'i') {
-                        if (sign < 0) {
-                            aR = 9;
-                        } else {
-                            bR = 9;
+                    if (sign < 0) {
+                        if (aR == 0) {
+                            aR = aR + 10;
                         }
-                    } else if (sign < 0) {
-                        aR = aR + 10;
                     } else {
-                        bR = bR + 10;
+                        if (bR == 0) {
+                            bR = bR + 10;
+                        }
                     }
                     break;
-                default: {
+                case 48:
+                case 49:
+                case 50:
+                case 51:
+                case 52:
+                case 53:
+                case 54:
+                case 55:
+                case 56:
+                case 57: {
                     if (sign < 0) {
                         if (a < 0) {
                             a = Character.getNumericValue(line.charAt(i));
@@ -124,6 +103,10 @@ public class Calculate {
                         }
                     }
                 }
+                break;
+                default:
+                    System.out.println("Ошибка №4: Недопустимые символы");
+                    System.exit(0);
             }
         }
         if ((a>=0 || b>=0) && (aR>=1 || bR>=1)) {
@@ -135,6 +118,10 @@ public class Calculate {
                 a = aR;
                 b = bR;
             }
+        }
+        if (a>10 || a<1 || b>10 || b<1) {
+            System.out.println("Ошибка №1: Аргумент(ы) вышел(и) за границу диапозона");
+            System.exit(0);
         }
         switch (sign) {
             case 1:
@@ -178,7 +165,7 @@ public class Calculate {
                     result = result + "V";
                     a = a - 5;
                 } else if (a / 4 >= 1) {
-                    result = result + "VI";
+                    result = result + "IV";
                     a = a - 4;
                 } else if (a / 1 >= 1) {
                     result = result + "I";
